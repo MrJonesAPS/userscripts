@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Pages and Repo Links
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Adds links between GitHub Pages and their corresponding GitHub repositories, and vice versa.
 // @author       You
 // @match        https://*.github.io/*
@@ -85,10 +85,10 @@
 
         // Function to insert the floating button on the GitHub page
         const insertGithubPagesButton = () => {
-            const actionsDiv = document.querySelector('.react-blob-header-edit-and-raw-actions');
-            if (actionsDiv && !document.querySelector('.to_github_pages')) {  // Avoid duplicate buttons
-                const pagesButton = createGithubPagesButton();
-                actionsDiv.appendChild(pagesButton);
+            const detailsContainer = document.querySelector('#repository-details-container .pagehead-actions');
+            if (detailsContainer && !document.querySelector('.to_github_pages')) {  // Avoid duplicate buttons
+            const pagesButton = createGithubPagesButton();
+            detailsContainer.appendChild(pagesButton);
             }
         };
 
