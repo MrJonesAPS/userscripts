@@ -69,37 +69,30 @@
 
         // If the repo is username.github.io, the GitHub Pages URL is simply https://username.github.io/
         if (repo === `${username}.github.io`) {
-            pagesURL = `https://${repo}/`;
+            pagesURL = `https://${username}.github.io/`;
         } else {
-            // Otherwise, the URL is https://username.github.io/repo
+            // Otherwise, the URL is https://${username}.github.io/${repo}
             pagesURL = `https://${username}.github.io/${repo}`;
         }
 
-        // Create the link element
-        const link = document.createElement('a');
-        link.href = pagesURL;
-        link.innerText = 'Go to GitHub Pages';
-        link.style.position = 'fixed';
-        link.style.top = '40px';
-        link.style.right = '10px';
-        link.style.backgroundColor = '#24292e';
-        link.style.color = 'white';
-        link.style.padding = '10px';
-        link.style.borderRadius = '5px';
-        link.style.textDecoration = 'none';
-        link.style.fontFamily = 'Arial, sans-serif';
-        link.style.fontSize = '14px';
-        link.style.zIndex = 1000;
-
-        // Add hover effect
-        link.onmouseover = function() {
-            link.style.backgroundColor = '#0366d6';
-        };
-        link.onmouseout = function() {
-            link.style.backgroundColor = '#24292e';
+       // Function to create the button
+        const createGithubPagesButton = () => {
+            const button = document.createElement('button');
+            button.textContent = 'Open in Github Pages';
+            button.classList.add('to_github_pages');
+            return button;
         };
 
-        // Append the link to the body
-        document.body.appendChild(link);
+        // Function to insert the floating button on the GitHub page
+        const insertGithubPagesButton = () => {
+            const actionsDiv = document.querySelector('.react-blob-header-edit-and-raw-actions');
+            if (actionsDiv && !document.querySelector('.to_github_pages')) {  // Avoid duplicate buttons
+                const pagesButton = createGithubPagesButton();
+                actionsDiv.appendChild(pagesButton);
+            }
+        };
+
+        // Call the function to insert the floating button
+        insertGithubPagesButton(); 
     }
 })();
