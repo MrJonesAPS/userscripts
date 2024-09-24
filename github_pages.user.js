@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Pages and Repo Links
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Adds links between GitHub Pages and their corresponding GitHub repositories, and vice versa.
 // @author       You
 // @match        https://*.github.io/*
@@ -75,24 +75,27 @@
             pagesURL = `https://${username}.github.io/${repo}`;
         }
 
-       // Function to create the button
-        const createGithubPagesButton = () => {
-            const button = document.createElement('button');
-            button.textContent = 'Open in Github Pages';
-            button.classList.add('to_github_pages');
-            return button;
+    // Function to create the button
+    const createGithubPagesButton = () => {
+        const button = document.createElement('button');
+        button.textContent = 'Open in Github Pages';
+        button.classList.add('to_github_pages');
+        button.onclick = () => {
+        window.location.href = pagesURL;
         };
+        return button;
+    };
 
-        // Function to insert the floating button on the GitHub page
-        const insertGithubPagesButton = () => {
-            const detailsContainer = document.querySelector('#repository-details-container .pagehead-actions');
-            if (detailsContainer && !document.querySelector('.to_github_pages')) {  // Avoid duplicate buttons
-            const pagesButton = createGithubPagesButton();
-            detailsContainer.appendChild(pagesButton);
-            }
-        };
+    // Function to insert the floating button on the GitHub page
+    const insertGithubPagesButton = () => {
+        const detailsContainer = document.querySelector('#repository-details-container .pagehead-actions');
+        if (detailsContainer && !document.querySelector('.to_github_pages')) {  // Avoid duplicate buttons
+        const pagesButton = createGithubPagesButton();
+        detailsContainer.appendChild(pagesButton);
+        }
+    };
 
-        // Call the function to insert the floating button
-        insertGithubPagesButton(); 
+    // Call the function to insert the floating button
+    insertGithubPagesButton();
     }
 })();
