@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Pages and Repo Links
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.5
 // @description  Adds links between GitHub Pages and their corresponding GitHub repositories, and vice versa.
 // @author       You
 // @match        https://*.github.io/*
@@ -64,9 +64,14 @@
         const username = repoMatch[1];
         const repo = repoMatch[2];
 
+        console.log("detected github repo:");
+        console.log("Username is: " + username);
+        console.log("Repo is: " + repo);
+
         // Construct the GitHub Pages URL based on the repository name
         let pagesURL;
 
+        /*I can't get this version to work. Sticking to simple repos for now
         // If the repo is username.github.io, the GitHub Pages URL is simply https://username.github.io/
         if (repo === `${username}.github.io`) {
             pagesURL = `https://${username}.github.io/`;
@@ -74,6 +79,9 @@
             // Otherwise, the URL is https://${username}.github.io/${repo}
             pagesURL = `https://${username}.github.io/${repo}`;
         }
+            */
+        pagesURL = `https://${username}.github.io/`;
+        
 
     // Function to create the button
     const createGithubPagesButton = () => {
